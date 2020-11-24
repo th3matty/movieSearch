@@ -5,17 +5,18 @@ import axios from "axios";
 export default function Searchbar() {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
-  const [externalData, setExternalData] = useState([]);
+  //const [externalData, setExternalData] = useState([]);
 
-  const dataUrl=  "https://moviedbbackend.herokuapp.com/api"
+
 
   const searchMovies = async (e) => {
     e.preventDefault();
-    const APIKEY= externalData.apikey
+    const APIKEY= externalData.apikey // or your API Key
 
     if (query === "") {
       console.log("please enter movie title");
     } else {
+      // put your apiKey in here
       const url = `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&query=${query}&page=1`;
       try {
         const results = await fetch(url);        
@@ -26,13 +27,6 @@ export default function Searchbar() {
       }
     }
   };
-
-  useEffect(() => {
-    axios.get(dataUrl).then((res) => {
-      console.log(res.data)
-      setExternalData(res.data)
-    });
-  }, []);
 
   return (
     <div>
